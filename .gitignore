@@ -101,5 +101,5 @@ datadog-setup.php
 *.key
 
 *.sql
-*.sql.gz
+*.tar.gz
 

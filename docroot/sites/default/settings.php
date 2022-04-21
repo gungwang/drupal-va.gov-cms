@@ -254,4 +254,4 @@ $settings['trusted_host_patterns'] = [
   '^drupal-react\.test$',
 ];
 
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '1024M');
