@@ -255,12 +255,3 @@ $settings['trusted_host_patterns'] = [
 ];
 
 ini_set('memory_limit', '512M');
-
-/*
- _core:
-  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
-langcode: en
-uuid: 45814d2f-3e31-4878-aa12-733ea60ff326
-
-
- */
