@@ -31,9 +31,14 @@ class ExclusionTypesServiceTest extends UnitTestCase {
   public function setUp() {
     parent::setUp();
 
-    $this->configFactory = $this->getConfigFactoryStub([
-      'exclusion_types_admin.settings' => ['types_to_exclude' => ['page' => 'page', 'office' => 'office']],
-    ]);
+    $this->configFactory = $this->getConfigFactoryStub(
+      [
+      'exclusion_types_admin.settings'
+        => [
+          'types_to_exclude'
+          => ['page' => 'page', 'office' => 'office'],
+        ]
+    );
     $this->exclusionTypes = new ExclusionTypes($this->configFactory);
 
     $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');

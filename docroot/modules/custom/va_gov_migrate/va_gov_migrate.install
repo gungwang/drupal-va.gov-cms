@@ -142,7 +142,7 @@ function _va_gov_migrate_add_nodes_to_migrate_map(string $migration_name, array 
     $migration = \Drupal::getContainer()->get('plugin.manager.migration')->createInstance($migration_name);
     // Migrate just 1 item so the migrate map gets built.
 
-    if($migration instanceof MigrationInterface) {
+    if ($migration instanceof MigrationInterface) {
 
       $executable = new MigrateExecutable($migration, new MigrateMessage(), ['limit' => 1]);
       $executable->import();

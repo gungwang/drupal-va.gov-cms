@@ -35,12 +35,14 @@ class SupportService extends MetalsmithSource {
 
       foreach ($row['social'][0]['subsections'] as $subsection) {
         foreach ($subsection['links'] as $service) {
+          // phpcs:disable.
           $this->serviceRows[] = [
             'service_name' => isset($service['label']) ? $service['label'] : $service['title'],
             'service_url' => $service['url'],
-            'service_number' => isset($service['number']) ? $service['number'] : '',
+            'service_number' => isset($service['number']) ?: $service['number'],
             'url' => $row['url'],
           ];
+          // phpcs:enable.
         }
       }
     }

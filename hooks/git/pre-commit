@@ -6,7 +6,9 @@ error_msg="Aborting commit. Your branch name must be prefixed with a VAGOV-TEAM-
 no_match_vagov=1; [[ $branch_name =~ VAGOV-TEAM-[0-9]+ ]] && no_match_vagov=0
 no_match_vacms=1; [[ $branch_name =~ VACMS-[0-9]+ ]] && no_match_vacms=0
 
-if [ $no_match_vagov == 1 ] && [ $no_match_vacms == 1 ]; then
+no_match_dr=1; [[ $branch_name =~ DR-[0-9]+ ]] && no_match_vacms=0
+
+if [ $no_match_vagov == 1 ] && [ $no_match_vacms == 1 && [ $no_match_dr == 1 ]; then
     echo "${error_msg}" >&2
     exit 1
 fi

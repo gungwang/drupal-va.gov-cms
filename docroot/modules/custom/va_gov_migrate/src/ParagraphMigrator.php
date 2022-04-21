@@ -322,7 +322,7 @@ class ParagraphMigrator {
   public function addWysiwyg(EntityInterface &$entity, $parent_field) {
     if (self::hasContent($this->wysiwyg)) {
       try {
-        list('allowed' => $allowed_paragraphs) = self::getAllowedParagraphs($entity, $parent_field);
+        ['allowed' => $allowed_paragraphs] = self::getAllowedParagraphs($entity, $parent_field);
       }
       catch (MigrateException $e) {
         Message::make('Could not add paragraphs to @field. ' . $e->getMessage(), ['@field' => $parent_field], Message::ERROR);
