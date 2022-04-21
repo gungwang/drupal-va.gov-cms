@@ -1522,6 +1522,7 @@ function _va_gov_backend_gtm_settings() {
     if (!$section_scheme instanceof AccessSchemeInterface) {
       return $sections;
     }
+
     $user_sections = \Drupal::service('workbench_access.user_section_storage')->getUserSections($section_scheme, $user);
     if (in_array('administration', $user_sections)) {
       $sections['userSections'] = 'all';
