@@ -146,6 +146,7 @@ module:
   pfm: 0
   post_api: 0
   prometheus_exporter: 0
+  raven: 0
   rdf: 0
   redirect: 0
   redirect_options: 0
@@ -159,7 +160,6 @@ module:
   seckit: 0
   serialization: 0
   simple_oauth: 0
-  simplesamlphp_auth: 0
   site_alert: 0
   slack: 0
   smart_date: 0
@@ -168,6 +168,7 @@ module:
   string_field_formatter: 0
   styleguide: 0
   subrequests: 0
+  syslog: 0
   system: 0
   tablefield: 0
   taxonomy: 0
@@ -196,7 +197,6 @@ module:
   va_gov_govdelivery: 0
   va_gov_graphql: 0
   va_gov_help_center: 0
-  va_gov_login: 0
   va_gov_media: 0
   va_gov_menu_access: 0
   va_gov_migrate: 0
@@ -232,4 +232,5 @@ theme:
   vagovadmin: 0
   claro: 0
   vagovclaro: 0
+  olivero: 0
 profile: minimal
