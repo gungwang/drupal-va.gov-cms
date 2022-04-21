@@ -21,6 +21,9 @@ services:
     class: GuzzleHttp\HandlerStack
     factory: ['Drupal\va_gov_build_trigger\Service\MiddlewareFactory', 'createHandlerStack']
     arguments: ['@logger.channel.va_gov_build_trigger']
+  va_gov.build_trigger.environment_discovery:
+    class: Drupal\va_gov_build_trigger\Environment\EnvironmentDiscovery
+    arguments: [ '@plugin.manager.va_gov.environment' ]
   va_gov_build_trigger.build_frontend:
     class: Drupal\va_gov_build_trigger\Service\BuildFrontend
     arguments: ['@messenger', '@logger.factory', '@va_gov.build_trigger.web_build_status', '@va_gov.build_trigger.environment_discovery', '@current_user']
@@ -35,9 +38,6 @@ services:
     arguments: ['@state']
   va_gov.build_trigger.web_build_link_checker:
     class: Drupal\va_gov_build_trigger\WebBuildBrokenLinkChecker
-  va_gov.build_trigger.environment_discovery:
-    class: Drupal\va_gov_build_trigger\Environment\EnvironmentDiscovery
-    arguments: [ '@plugin.manager.va_gov.environment' ]
   plugin.manager.va_gov.environment:
     class: Drupal\va_gov_build_trigger\Environment\EnvironmentManager
     parent: default_plugin_manager
