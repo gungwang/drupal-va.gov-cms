@@ -11,8 +11,8 @@ use Drupal\user\Entity\User;
 /**
  * FeatureContext class defines custom step definitions for Behat.
  */
-class FeatureContext extends RawDrupalContext {
-
+class FeatureContext extends RawDrupalContext
+{
   use \Traits\FieldTrait;
   use \Traits\UserEntityTrait;
   use \Traits\ContentTrait;
@@ -46,7 +46,8 @@ class FeatureContext extends RawDrupalContext {
    * You can also pass arbitrary arguments to the
    * context constructor through behat.yml.
    */
-  public function __construct() {
+  public function __construct()
+  {
     $this->timestamp = time();
   }
 
@@ -55,7 +56,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @AfterScenario
    */
-  public function cleanUp() {
+  public function cleanUp()
+  {
     if (!empty($this->privateStorage)) {
       foreach ($this->privateStorage as $deletable) {
         $deletable->delete();
@@ -73,12 +75,12 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then I visit the :arg1 page for a node with the title :arg2
    */
-  public function iViewNode($page, $title) {
+  public function iViewNode($page, $title)
+  {
     $nid = $this->getTestContentNidByTitle($title);
     if ($nid) {
       $this->visitPath("node/$nid/$page");
-    }
-    else {
+    } else {
       throw new \Exception("Cannot locate a valid node with the title '$title'");
     }
   }
@@ -93,12 +95,12 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then I visit the :arg1 page for a term with the title :arg2
    */
-  public function iViewTerm($page, $title) {
+  public function iViewTerm($page, $title)
+  {
     $tid = $this->getTestContentTidByTitle($title);
     if ($tid) {
       $this->visitPath("taxonomy/term/$tid/$page");
-    }
-    else {
+    } else {
       throw new \Exception("Cannot locate a valid term with the title '$title'");
     }
   }
@@ -111,7 +113,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then I should see exactly :string
    */
-  public function iShouldSeeExactly($string) {
+  public function iShouldSeeExactly($string)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->findAll('xpath', "//*[contains(text(), '$string')]");
 
@@ -128,7 +131,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then I should not see exactly :string
    */
-  public function iShouldNotSeeExactly($string) {
+  public function iShouldNotSeeExactly($string)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->findAll('xpath', "//*[contains(text(), '$string')]");
 
@@ -145,7 +149,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then the :element element should not exist
    */
-  public function theElementShouldNotExist($element) {
+  public function theElementShouldNotExist($element)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $element);
 
@@ -162,11 +167,12 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then the :selector element should exist
    */
-  public function theElementShouldExist($selector) {
+  public function theElementShouldExist($selector)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $selector);
 
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \InvalidArgumentException(sprintf('Could not evaluate XPath: "%s"', $selector));
     }
   }
@@ -179,7 +185,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then the xpath :expression should have no matches
    */
-  public function theXpathExpressionShouldHaveNoMatches($expression) {
+  public function theXpathExpressionShouldHaveNoMatches($expression)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find(
       'xpath',
@@ -200,10 +207,11 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then :element should have the attribute :attribute
    */
-  public function theElementShouldHaveAttribute($element, $attribute) {
+  public function theElementShouldHaveAttribute($element, $attribute)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $element);
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \InvalidArgumentException(sprintf('This element is not available: "%s"', $element));
     }
     $attribute_val = $element->getAttribute($attribute);
@@ -224,7 +232,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then :element should have the attribute :attribute with value :value
    */
-  public function theElementShouldHaveAttributeValue($element, $attribute, $value) {
+  public function theElementShouldHaveAttributeValue($element, $attribute, $value)
+  {
     $this->theElementShouldHaveAttribute($element, $attribute);
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $element);
@@ -246,12 +255,13 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then :element should have the attribute :attribute containing value :value
    */
-  public function theElementShouldHaveAttributeContainingValue($element, $attribute, $value) {
+  public function theElementShouldHaveAttributeContainingValue($element, $attribute, $value)
+  {
     $this->theElementShouldHaveAttribute($element, $attribute);
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $element);
     $attribute_val = $element->getAttribute($attribute);
-    if (strpos($attribute_val, $value) === FALSE) {
+    if (strpos($attribute_val, $value) === false) {
       throw new \InvalidArgumentException(sprintf('This attribute value "%s" does not contain value "%s"', $attribute_val, $value));
     }
   }
@@ -268,7 +278,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then :element should have the attribute :attribute matching pattern :pattern
    */
-  public function theElementShouldHaveAttributeMatchingPattern($element, $attribute, $pattern) {
+  public function theElementShouldHaveAttributeMatchingPattern($element, $attribute, $pattern)
+  {
     $this->theElementShouldHaveAttribute($element, $attribute);
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $element);
@@ -290,7 +301,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Given I set the node with title :title to :status
    */
-  public function setTheNodeWithTitle($status, $title) {
+  public function setTheNodeWithTitle($status, $title)
+  {
     /** @var array{id: int, node: \Drupal\node\NodeInterface} $nodes */
     $nodes = \Drupal::entityTypeManager()
       ->getStorage('node')
@@ -303,8 +315,7 @@ class FeatureContext extends RawDrupalContext {
     if ($status === 'published') {
       $node->setPublished();
       $node->set('moderation_state', 'published');
-    }
-    else {
+    } else {
       $node->setUnpublished();
       $node->set('moderation_state', 'archived');
     }
@@ -319,13 +330,14 @@ class FeatureContext extends RawDrupalContext {
    *
    * @When I click on the xpath :expression
    */
-  public function iClickOnTheXpath($expression) {
+  public function iClickOnTheXpath($expression)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find(
       'xpath',
       $session->getSelectorsHandler()->selectorToXpath('xpath', $expression)
     );
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \InvalidArgumentException(sprintf('Cannot find XPath expression: "%s"', $expression));
     }
     $element->click();
@@ -339,13 +351,14 @@ class FeatureContext extends RawDrupalContext {
    *
    * @When I click on the text :text
    */
-  public function iClickOnTheText($text) {
+  public function iClickOnTheText($text)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find(
       'xpath',
       $session->getSelectorsHandler()->selectorToXpath('xpath', '*//*[text()="' . $text . '"]')
     );
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \InvalidArgumentException(sprintf('Cannot find text: "%s"', $text));
     }
 
@@ -357,11 +370,12 @@ class FeatureContext extends RawDrupalContext {
    *
    * @When I click on the element with selector :element
    */
-  public function iClickOnTheElementWithSelector($element) {
+  public function iClickOnTheElementWithSelector($element)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $element);
 
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \InvalidArgumentException(sprintf('Could not evaluate XPath: "%s"', $element));
     }
 
@@ -380,15 +394,15 @@ class FeatureContext extends RawDrupalContext {
    *
    * @When I fill in :locator with the text :value
    */
-  public function whenIfillInWith($locator, $value) {
+  public function whenIfillInWith($locator, $value)
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find('css', $locator);
 
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \InvalidArgumentException(sprintf('Could not evaluate element: "%s"', $locator));
     }
     $session->getPage()->find('css', $locator)->setValue($value);
-
   }
 
   /**
@@ -403,14 +417,15 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then the :option option from :select should be selected
    */
-  public function theOptionFromShouldBeSelected($option, $select) {
+  public function theOptionFromShouldBeSelected($option, $select)
+  {
     $select_field = $this->getSession()->getPage()->find('css', $select);
-    if (NULL === $select_field) {
+    if (null === $select_field) {
       throw new \Exception(sprintf('The select "%s" was not found in the page %s', $select, $this->getSession()->getCurrentUrl()));
     }
 
     $option_field = $select_field->find('xpath', "//option[@selected='selected']");
-    if (NULL === $option_field) {
+    if (null === $option_field) {
       throw new \Exception(sprintf('No option is selected in the %s select in the page %s', $select, $this->getSession()->getCurrentUrl()));
     }
 
@@ -431,7 +446,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then :selector should contain :item
    */
-  public function thenSelectorShouldContain($selector, $item) {
+  public function thenSelectorShouldContain($selector, $item)
+  {
     $session = $this->getSession();
     $select_item = $session->getPage()->find('css', $selector);
     if (empty($select_item)) {
@@ -457,7 +473,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then :selector should not contain :item
    */
-  public function thenSelectorShouldNotContain($selector, $item) {
+  public function thenSelectorShouldNotContain($selector, $item)
+  {
     $session = $this->getSession();
     $select_item = $session->getPage()->find('css', $selector);
     if (empty($select_item)) {
@@ -477,14 +494,15 @@ class FeatureContext extends RawDrupalContext {
    * @return array
    *   The Drupal settings.
    */
-  protected function getDrupalSettings() {
+  protected function getDrupalSettings()
+  {
     $session = $this->getSession();
     $element = $session->getPage()->find('xpath', "//script[@data-drupal-selector='drupal-settings-json']");
-    if (NULL === $element) {
+    if (null === $element) {
       throw new \Exception('The Drupal Settings JSON could not be retrieved.');
     }
     $json = $element->getText();
-    return json_decode($json, TRUE);
+    return json_decode($json, true);
   }
 
   /**
@@ -492,7 +510,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @Then the :arg1 flag for node :arg2 should be set for me
    */
-  public function theFlagForNodeShouldBeSetForTheRevisionEditor(string $flagName, string $title) {
+  public function theFlagForNodeShouldBeSetForTheRevisionEditor(string $flagName, string $title)
+  {
     $account = User::load($this->getUserManager()->getCurrentUser()->uid);
     $flag_service = \Drupal::service('flag');
     $flag = $flag_service->getFlagById($flagName);
@@ -516,10 +535,11 @@ class FeatureContext extends RawDrupalContext {
    *
    * @BeforeScenario
    */
-  public function gatherContexts(BeforeScenarioScope $scope) {
+  public function gatherContexts(BeforeScenarioScope $scope)
+  {
     /** @var \Behat\Behat\Context\Environment\InitializedContextEnvironment $environment */
     $environment = $scope->getEnvironment();
-    $this->drushContext = $environment->getContext(DrushContext::CLASS);
+    $this->drushContext = $environment->getContext(DrushContext::class);
   }
 
   /**
@@ -527,7 +547,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @AfterStep
    */
-  public function printWatchdogLogAfterFailedStep($event) {
+  public function printWatchdogLogAfterFailedStep($event)
+  {
     if ($event->getTestResult()->getResultCode() === TestResult::FAILED) {
       $this->drushContext->assertDrushCommand('wd-show');
       $this->drushContext->printLastDrushOutput();
@@ -539,7 +560,8 @@ class FeatureContext extends RawDrupalContext {
    *
    * @AfterStep
    */
-  public function printHtmlAfterFailedStep($event) {
+  public function printHtmlAfterFailedStep($event)
+  {
     if ($event->getTestResult()->getResultCode() === TestResult::FAILED) {
       $dumpPath = 'behat_failures';
       $session = $this->getSession();
@@ -559,5 +581,4 @@ class FeatureContext extends RawDrupalContext {
       echo "\nDumped HTML to $htmlPath\nDumped Text to $textPath\n";
     }
   }
-
 }

@@ -99,3 +99,7 @@ datadog-setup.php
 
 # Key files
 *.key
+
+*.sql
+*.tar.gz
+

@@ -132,7 +132,7 @@
         "drupal/simplesamlphp_auth": "^3.2",
         "drupal/site_alert": "1.2",
         "drupal/slack": "^1.2",
-        "drupal/smart_date": "3.4.3",
+        "drupal/smart_date": "^3.5.1",
         "drupal/social_media_links": "^2.8",
         "drupal/string_field_formatter": "^2.0",
         "drupal/styleguide": "^2.0@beta",
@@ -355,7 +355,8 @@
             },
             "drupal/cer": {
                 "3197953-5 - Make d9 compatible": "https://www.drupal.org/files/issues/2021-03-19/cer-3197953-5.patch",
-                "3200122 - Remove delete hook": "https://www.drupal.org/files/issues/2021-02-24/delete-hook-added-in-dev-causes-test-failures.patch"
+                "3200122 - Remove delete hook": "https://www.drupal.org/files/issues/2021-02-24/delete-hook-added-in-dev-causes-test-failures.patch",
+                "3159702 - Drupal 9 missing 'config_export' definition": "https://www.drupal.org/files/issues/2020-07-16/3159702-2.patch"
             },
             "drupal/content_lock": {
                 "Content lock causes redirect response preventing migration rollback.": "https://www.drupal.org/files/issues/2018-08-28/2951652-4.patch"
@@ -381,6 +382,7 @@
                 "Internal Claro tweaks": "patches/claro-css-tweaks.patch",
                 "3176625 - Install from existing config with a theme that declares module dependencies fails": "https://www.drupal.org/files/issues/2021-05-18/fix_ConfigImportSubscriber_validateThemes-3176625-29.patch",
                 "3099026 - Claro's preprocessing of field multiple value form's table header cell removes potential changes by others": "https://www.drupal.org/files/issues/2020-02-20/3099026-9.patch"
+
             },
             "drupal/decoupled_router": {
                 "Unable to resolve path on node in other language than default": "https://www.drupal.org/files/issues/2021-05-05/3111456-34.patch"

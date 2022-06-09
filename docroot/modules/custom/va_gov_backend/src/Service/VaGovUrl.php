@@ -5,7 +5,6 @@ namespace Drupal\va_gov_backend\Service;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\va_gov_build_trigger\Environment\EnvironmentDiscovery;
-use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 

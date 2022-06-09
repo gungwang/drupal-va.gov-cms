@@ -19,7 +19,7 @@ $databases['default']['default'] = array(
   'password' => getenv('CMS_MARIADB_PASSWORD') ?: 'drupal8',
   'prefix' => '',
   // 'database' is the default DB container for Lando (local).
-  'host' => getenv('CMS_MARIADB_HOST') ?: 'database',
+  'host' => getenv('CMS_MARIADB_HOST') ?: 'localhost',
   'port' => 3306,
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
 );
@@ -248,3 +248,10 @@ if (extension_loaded('memcache') && !empty($settings['memcache']['servers'])) {
   $settings['container_yamls'][] = $app_root . '/' . $site_path . '/../default/services/services.memcache.yml';
   $settings['memcache']['persistent'] = 'drupal';
 }
+
+$settings['trusted_host_patterns'] = [
+  '^loalhost$',
+  '^drupal-react\.test$',
+];
+
+ini_set('memory_limit', '1024M');

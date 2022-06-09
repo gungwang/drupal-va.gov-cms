@@ -152,10 +152,11 @@ class PostApiQueueTest extends ExistingSiteBase {
    */
   protected function processItem($data) {
     $apikey = Settings::get('post_api_apikey');
-    $endpoint_path = isset($data['endpoint_path']) ? $data['endpoint_path'] : NULL;
+    $endpoint_path = isset($data['endpoint_path']) ?: $data['endpoint_path'];
     $endpoint = Settings::get('post_api_endpoint_host') . $endpoint_path;
+    // phpcs:disable.
     $payload = isset($data['payload']) ? $data['payload'] : [];
-
+    // phpcs:enable.
     $request_service = \Drupal::service('post_api.request');
 
     // Send POST request and return the response.

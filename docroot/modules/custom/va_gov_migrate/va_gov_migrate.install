@@ -141,10 +141,14 @@ function _va_gov_migrate_add_nodes_to_migrate_map(string $migration_name, array 
     // Table does not exist yet so make it.
     $migration = \Drupal::getContainer()->get('plugin.manager.migration')->createInstance($migration_name);
     // Migrate just 1 item so the migrate map gets built.
-    $executable = new MigrateExecutable($migration, new MigrateMessage(), ['limit' => 1]);
-    $executable->import();
-    // Roll it back so it does not exist.
-    $executable->rollback();
+
+    if ($migration instanceof MigrationInterface) {
+
+      $executable = new MigrateExecutable($migration, new MigrateMessage(), ['limit' => 1]);
+      $executable->import();
+      // Roll it back so it does not exist.
+      $executable->rollback();
+    }
   }
 
   foreach ($nodes_to_be_migratized as $values) {
